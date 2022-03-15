@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <div class="row justify-content-center" style="padding-top: 120px; margin-bottom: 250px;">
+    <div class="col-xs-10 col-sm-10 col-md-12 col-lg-6 col-xl-6">
+      <div class="card">
+  
+        <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+          <div class="card-body">
+            <div class="text-center">
+              <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
+            </div>
+            <h3 class="text-center que">¡Regístrate en nuestra comunidad!
+            </h3>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Nombre Completo" type="text" formControlName="nombre" required autofocus>
+
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
+              </mat-form-field>
+              <div class="row" style="margin-left:0px;">
+                <div class="col-12 col-md-6" style="padding-right: 5px; padding-left: 0px;">
+                  <div class="example-container">
+                    <mat-form-field>
+                      <input formControlName="fecha_nac" required matInput placeholder="Fecha de Nacimiento (DD-MM-AAAA)">
+ 
+                      <mat-error *ngIf="formErrores.fecha_nac">{{formErrores.fecha_nac}}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6" style="padding-right: 0px; padding-left: 5px;">
+                  <div class="example-container">
+                    <mat-form-field>
+                      <mat-select formControlName="genero" placeholder="Género" required>
+                        <mat-option value="Femenino">
+                          Femenino </mat-option>
+                        <mat-option value="Masculino">
+                          Masculino </mat-option>
+                        <mat-option value="Otro">
+                          Otro </mat-option>
+                        <mat-option value="No">
+                          Prefiero no responder </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <mat-form-field>
+                <input matInput placeholder="Correo Electrónico" type="email" formControlName="email" required>
+             
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error *ngIf="formErrores.email">{{formErrores.email}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Ingrese su contraseña" id="contrasena" [type]="hide ? 'password' : 'text'"
+                  formControlName="contrasena" required>
+                <i class="material-icons" matSuffix (click)="hide=!hide">{{ hide ? 'visibility' : 'visibility_off'
+                  }}</i>
+                <mat-error *ngIf="formErrores.contrasena">{{formErrores.contrasena}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirme su contraseña" id="confirmar"
+                  [type]="oculto ? 'password' : 'text'" formControlName="confirmar" required>
+                <i class="material-icons" matSuffix (click)="oculto=!oculto">{{ oculto ? 'visibility' : 'visibility_off'
+                  }}</i>
+                <mat-error *ngIf="formulario.controls.confirmar.errors?.verificarContrasena">Las contraseñas no son
+                  iguales.</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="vecindario" required placeholder="Seleccionar Comunidad...">
+                <mat-option [value]="vecindario" *ngFor="let vecindario of vecindarios | async">
+                  {{vecindario.nombre}}
+                </mat-option>
+                <mat-error *ngIf="formErrores.vecindario">{{formErrores.vecindario}}</mat-error>
+              </mat-select>
+               
+              </mat-form-field>
+
+            </div>
+
+            <button class="boton" type="submit" mat-raised-button color="accent" *ngIf="!cargando"
+              [disabled]="!formulario.valid">
+              <i class="material-icons icono-boton">person_add</i> Crear Cuenta</button>
+            <button class="boton" type="submit" mat-raised-button color="accent" disabled *ngIf="cargando">
+              <i class='fa fa-circle-o-notch fa-spin'></i> Registrando usuario...</button>
+            <hr>
+
+            <p [class]="this.clase" role="alert" *ngIf="mensaje">
+              <span [class]="this.icono" aria-hidden="true"></span>
+              {{this.mensaje}}
+            </p>
+            <div class="row">
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="primary" routerLink="/iniciosesion">
+                    <i class="material-icons icono-boton">person</i> Ya estoy Registrado</a>
+                </p>
+              </div>
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="warn" routerLink="/recuperarcont">
+                    <i class="material-icons icono-boton">fingerprint</i> Reestablecer Constraseña</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

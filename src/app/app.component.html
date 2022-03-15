@@ -1,0 +1,77 @@
+
+<app-header></app-header>
+
+<mat-sidenav-container fullscreen>
+
+
+  <mat-sidenav #sidenav class="lateral" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <div>
+      <div class="espacio-top" *ngIf="!(authService.user | async)"></div>
+      <div class="sidenav">
+        <div class="text-center" style="background: #f2f2f2; padding-top:80px;padding-bottom:10px;"
+          *ngIf="authService.user | async as user">
+          <a routerLink="/perfil">
+            <img class="rounded-circle foto-perfil" [src]="user.photoURL || '../assets/user_google.jpg'"
+              [alt]="user.displayName" width="100px" height="100px">
+          </a>
+          <br>
+          <small>Bienvenido(a)</small>
+          <br>
+          <span class="nombre">
+            <a routerLink="/perfil">{{user.displayName}}
+            </a>
+          </span>
+         
+        </div>
+        <div *ngIf="!(authService.user | async)">
+          <div class="text-center">
+            <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
+          </div>
+        </div>
+        <div style="margin-top:0px;" *ngIf="authService.user | async as usuario">
+          <div class="menu-titulo">COMUNIDAD ACTUAL</div>          
+       s
+          </div> -->
+          <select class="custom-select" (change)="cambiarVecindario()" [(ngModel)]="vecindarioActual">
+            <option selected disabled value="0" *ngIf="usuario.vecindarios.length==0">No hay vecindarios
+            </option>
+            <option *ngFor="let vecindario of usuario.vecindarios" [selected]="vecindarioActual == vecindario.vecindarioId" [value]="vecindario.vecindarioId">{{vecindario.nombre}}</option>
+          </select>
+          <div class="menu-titulo" *ngIf="usuario.vecindarios.length > 0">SECCIONES</div>
+          <mat-list style="margin-top:-8px;" *ngIf="usuario.vecindarios.length > 0">
+            <a mat-list-item class="itemmenu" routerLink="{{menu.ruta}}" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }" *ngFor="let menu of menus">
+              <mat-icon class="iconomenu" mat-list-avatar>{{ menu.icono }}</mat-icon>{{menu.nombre}}
+            </a>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </div>
+        <div class="example-container" *ngIf="authService.user | async">
+          <button routerLink="comunidades" color="primary" mat-raised-button><i class="material-icons icono-boton">domain</i> Explorar otras comunidades</button>
+        </div>
+        <div class="text-center" style="position: absolute;bottom:3px;left:45px;">
+         
+          <small class="politicas"><i class="material-icons icono-politicas" routerLink="contacto" matTooltip="Contáctenos">mail_outline</i><i matTooltip="Privacidad & Políticas" class="material-icons icono-politicas">info_outline</i> <b>Versión 2.2.5 | Hecho en</b> <span class="flag-icon flag-icon-cl"></span>
+          </small>
+        </div>
+  
+      </div>
+    </div>
+
+  </mat-sidenav>
+
+
+
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-spinner [diameter]="48" [strokeWidth]="4.8"></mat-spinner>
+  </div>
+
+  <div class="container-fluid" *ngIf="!loading">
+    <div *ngIf="(authService.user | async)" class="espacio80"></div>
+    <router-outlet></router-outlet>
+    <div *ngIf="(authService.user | async)" class="espacio80"></div>
+  </div>
+
+  <app-footer *ngIf="(authService.user | async)?.vecindarios.length>0" class="footer"></app-footer>
+
+</mat-sidenav-container>

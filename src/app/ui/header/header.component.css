@@ -1,0 +1,42 @@
+
+
+  .tool-logo{
+    background-color: #00285C;
+    height: 64px;
+    z-index:98!important;
+  }
+  
+
+
+
+  .logo{
+    padding-top: 20px;
+}
+
+mat-toolbar {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.foto-perfil{
+  border: double 2px transparent;
+  border-radius: 80px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #fff,#f6f6f6);
+  background-origin: border-box;
+  background-clip: content-box, border-box;  
+
+}
+
+.image-cropper {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.profile-pic {
+display: inline;
+margin: 0 auto;
+margin-left: -25%;
+height: 100%;
+width: auto;
+}

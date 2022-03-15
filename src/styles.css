@@ -1,0 +1,131 @@
+
+
+*{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto, monospace',
+  }
+
+  
+  .icono-boton{
+    font-size:24px;
+    margin-bottom:3px;
+  }
+
+  .icono-titulo{
+    font-size:25px;
+    vertical-align: middle;
+    padding: 0; 
+  }
+
+  .icono-titulo-vecindarios{
+    font-size:18px;
+    vertical-align: middle;
+    padding: 0; 
+  }
+
+
+  button, button:hover, button:active   
+  {   
+   outline:0!important;
+  }
+  
+  a, a:active, a:hover{
+    text-decoration: none!important;
+    outline:0!important;
+  }
+
+
+.beta{
+  font-family: "Open Sans"!important;
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
+
+}
+
+.titulo{
+  font-family: 'Ubuntu'!important;
+  font-size: 18px;
+}
+
+.ais-search-box{
+  max-width: 100%!important;
+}
+
+em {
+  color: red;
+  font-style: normal;
+  text-decoration: underline;
+}
+
+.ais-SearchBox-reset, .ais-SearchBox-submit{
+display: none;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto !important;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.categorias-container > * {
+  width: 50%;
+}
+
+
+.modal-dialog {
+  padding-top: 100px!important;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}
+
+.titulo-seccion{
+  color:fff;
+}
+
+
+.vecindiario{
+  font-family: 'Ubuntu'!important;
+  font-size: 15px;
+  color: #f2f2f2;
+  padding-top:5px;
+}
+
+.lateral{
+  background: rgba(255,255,255,1);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(210,239,254,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(210,239,254,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d2effe', GradientType=0 );
+}
+
+.politicas{
+  color:grey;
+  font-size:10px;
+}
+
+.icono-politicas{
+  vertical-align: middle;
+  padding-bottom:4px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+.mat-card-header-text{
+  width: 100% !important;
+}
+

@@ -1,0 +1,24 @@
+
+<mat-sidenav #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <div class="espacio"></div>
+
+    <mat-list>
+        <a mat-list-item class="itemmenu" routerLink="{{menu.ruta}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            *ngFor="let menu of menus">
+            <mat-icon class="iconomenu" mat-list-avatar>{{ menu.icono }}</mat-icon>{{menu.nombre}}</a>
+    </mat-list>
+
+    <div class="tool-footer footer-side">
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    Condiciones
+                </div>
+                <div class="col">
+                    <p class="text-right">v.beta.2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-sidenav>

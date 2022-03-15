@@ -1,0 +1,95 @@
+
+<mat-toolbar class="tool-logo fixed-top"
+    [ngStyle]="{'background': (authService.user | async) ? 'linear-gradient(135deg,#00285c,#303030)' :'linear-gradient(135deg,#00285c,#1e88e5)'}">
+
+    <button mat-icon-button (click)="toggle()" style="color:#fff">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>
+        <a routerLink="/">
+            <img *ngIf="!this.ac.isScreenSmall()" src="/assets/logo4.png" style="padding-bottom:5px; margin-left:10px;" width="200"
+                class="img-fluid d-inline-block" alt="VecinDiario">
+            <img *ngIf="this.ac.isScreenSmall()" src="/assets/logo_mobile.png" style="padding-bottom:5px; margin-left:10px;" width="35"
+                class="img-fluid d-inline-block" alt="VecinDiario">
+
+
+
+        </a>
+
+
+
+    
+
+    </span>
+  
+    <span class="app-toolbar-filler"></span>
+    <span>
+        <div *ngIf="authService.user | async as user">
+     
+            <button *ngIf="user.admin" mat-icon-button style="color:#fff;margin-right:5px;" routerLink="usuarios"
+                matTooltip="Usuarios">
+                <i class="material-icons">group</i>
+            </button>
+            <button mat-button *ngIf="!this.ac.isScreenSmall()" [matMenuTriggerFor]="menu1">
+                <img class="rounded-circle foto-perfil" width="30px" height="30px"
+                    [src]="user.photoURL || '../../../assets/user_google.jpg'" [alt]="user.displayName"> &nbsp;
+                <span style="color:#fff;" *ngIf="authService.user | async as user">
+                    {{user.displayName | trim }}
+                </span>
+                <i class="material-icons icono-boton" style="color:#fff;">keyboard_arrow_down</i>
+            </button>
+            <button mat-button [matMenuTriggerFor]="menu1" *ngIf="this.ac.isScreenSmall()">
+                <img class="rounded-circle foto-perfil" width="30px" height="30px"
+                    [src]="user.photoURL || '../../../assets/user_google.jpg'" [alt]="user.displayName">
+                <i class="material-icons icono-boton" style="color:#fff;">keyboard_arrow_down</i>
+
+            </button>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu1" style="color:#fff;margin-right:5px;"
+            *ngIf="!(authService.user | async)">
+            <i class="material-icons">person</i>
+        </button>
+        <mat-menu #menu1="matMenu" style="z-index:99!important;">
+            <div *ngIf="authService.user | async; then authenticated else guest">
+            </div>
+
+            <ng-template #authenticated>
+
+                <div *ngIf="authService.user | async as user">
+                    <button mat-menu-item *ngIf="user" routerLink="/perfil">
+                        <mat-icon>person</mat-icon>
+                        <span>Mi Perfil</span>
+                    </button>
+                
+                    <button mat-menu-item *ngIf="user" (click)="salir()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Cerrar Sesión</span>
+                    </button>
+                </div>
+
+            </ng-template>
+
+            <ng-template #guest>
+                <button mat-menu-item *ngIf="!user" routerLink="/iniciosesion">
+                    <mat-icon>person</mat-icon>
+                    <span> Iniciar Sesión</span>
+                </button>
+                <button mat-menu-item *ngIf="!user" routerLink="/registro">
+                    <mat-icon>person_add</mat-icon>
+                    <span>Crear Cuenta</span>
+                </button>
+                <button mat-menu-item *ngIf="!user" routerLink="/recuperarcont">
+                    <mat-icon>error</mat-icon>
+                    <span>Olvidó su Contraseña?</span>
+                </button>
+            </ng-template>
+ 
+
+        </mat-menu>
+    </span>
+   
+    <span>
+   
+    </span>
+</mat-toolbar>

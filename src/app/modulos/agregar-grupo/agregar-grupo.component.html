@@ -1,0 +1,102 @@
+
+
+
+  <div *ngIf="authService.user | async as user">
+    <form [formGroup]="formulario" (ngSubmit)="agregar(user)" novalidate>
+  
+      <div class="modal-header" style="background:#06A8F9;color:#fff;">
+        <span class="modal-title">
+          <i class="material-icons icono-titulo">groups</i>&nbsp; Agregar Grupo </span>
+  
+        <div *ngIf="grupoActual | async as grupo">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModal(grupo.fotos)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <div *ngIf="!grupoActual">
+          <button type="button" class="close" aria-label="Close" (click)="cerrarModalSF()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+      </div>
+
+  
+      <div class="modal-body">
+        <div class="container-fluid">
+  
+          <div class="example-container">
+            <mat-form-field>
+              <input matInput placeholder="Ingrese el nombre" type="text" formControlName="nombre" required autofocus>
+              <mat-error *ngIf="formErrores.nombre">{{formErrores.nombre}}</mat-error>
+            </mat-form-field>
+  
+ 
+  
+            <mat-form-field *ngIf="categorias$ | async as arreglo">
+              <mat-select placeholder="Ingrese la categoria" required formControlName="categoria">
+                <mat-option *ngFor="let categoria of arreglo.cat_grupos" [value]="categoria.nombre">
+                  {{categoria.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formErrores.categoria">{{formErrores.categoria}}</mat-error>
+            </mat-form-field>
+  
+  
+            <mat-form-field>
+              <textarea formControlName="texto" required minlenght="1" matInput #texto placeholder="Descripción" matTextareaAutosize matAutosizeMinRows="3"
+                matAutosizeMaxRows="10"></textarea>
+              <mat-hint *ngIf="texto.value.length > 300" align="end">{{texto.value.length}} / 300</mat-hint>
+    
+            </mat-form-field>
+            <br>
+          </div>
+  
+
+  
+          <div class="row" *ngIf="grupoActual | async as grupo">
+  
+            <div class="col-2" *ngFor="let foto of grupo.fotos">
+  
+              <div class="foto">
+                <img class="rounded" height="75px;" width="75px;" [src]="foto.photoURL" />
+                <div class="destacado" *ngIf="foto.photoURL == grupo.principal">
+                    <i class="material-icons" matTooltip="Imagen Principal" style="cursor: default">star_rate</i>
+                </div>
+                <div class="borrar">
+                  <a [matMenuTriggerFor]="menu">
+                    <i class="material-icons icono-boton">more_vert</i>
+                  </a>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="eliminarFoto(grupo.fotos, foto.path)">
+                        <i class="material-icons icono-boton">delete</i> Eliminar</button>
+                      <button mat-menu-item (click)="cambiarPrincipal(foto.photoURL)">
+                        <i class="material-icons icono-boton">photo</i> Imagen Principal</button>
+                    </mat-menu>
+                </div>
+              </div>
+  
+  
+            </div>
+            <div class="col-2 rounded" style="width:75px; height:75px;" *ngIf="loading">
+              <div style="margin-top:25px;margin-left:25px;">
+                <mat-spinner [diameter]="24" [strokeWidth]="2.4"></mat-spinner>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+  
+      <div class="modal-footer">
+        <button mat-raised-button *ngIf="!cargando" color="accent" type="submit" [disabled]="!formulario.valid">
+          <i class='material-icons icono-boton'>mode_edit</i> Agregar</button>
+        <button mat-raised-button disabled *ngIf="cargando" type="submit" disabled>
+          <i class='fa fa-circle-o-notch fa-spin'></i> Agregando...</button>
+      </div>
+  
+    </form>
+  
+  </div>

@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row justify-content-center" style="padding-top: 150px;">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-5 col-xl-5">
+      <div class="card"> 
+        <form [formGroup]="formulario" (ngSubmit)="enviar()">
+          <div class="card-body">
+            <div class="text-center">
+              <img src="/assets/logo-vert.png" width="250" alt="Vecindiario">
+            </div>
+            <h3 class="text-center que">¡Qué bueno tenerte de vuelta!
+            </h3>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput placeholder="Ingrese su e-mail" type="email" formControlName="email" required autofocus>
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error *ngIf="formErrores.email">{{formErrores.email}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Ingrese su contraseña" [type]="hide ? 'password' : 'text'"
+                  formControlName="password" required>
+                <i class="material-icons" matSuffix (click)="hide=!hide">{{ hide ? 'visibility' : 'visibility_off'
+                  }}</i>
+                <mat-error *ngIf="formErrores.password">{{formErrores.password}}</mat-error>
+              </mat-form-field>
+
+            </div>
+            <button class="boton" type="submit" mat-raised-button color="accent" [disabled]="!formulario.valid"
+              *ngIf="!cargando">
+              <i class="icono-boton material-icons">person</i> Iniciar sesión</button>
+            <button class="boton" type="submit" mat-raised-button color="accent" disabled *ngIf="cargando">
+              <i class='fa fa-circle-o-notch fa-spin'></i> Autenticando usuario...</button>
+            <hr>
+
+            <p [class]="this.clase" role="alert" *ngIf="mensaje">
+              <span [class]="this.icono" aria-hidden="true"></span>
+              {{this.mensaje}}
+            </p>
+            <div class="row">
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="primary" routerLink="/registro">
+                    <i class="icono-boton material-icons">person_add</i> Crear una cuenta</a>
+                </p>
+              </div>
+              <div class="col">
+                <p align="center">
+                  <a mat-button color="warn" routerLink="/recuperarcont">
+                    <i class="icono-boton material-icons">fingerprint</i> Reestablecer Constraseña</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
